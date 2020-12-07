@@ -1,7 +1,7 @@
 {
   "name": "Gallows",
   "productName": "Gallows",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A structure, typically of two uprights and a crosspiece, for the hanging of projects that made you angry.",
   "main": "main.js",
   "scripts": {
