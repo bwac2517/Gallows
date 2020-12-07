@@ -28,7 +28,6 @@ function getDirectories(srcpath) {
 function searchDirectories() {
   this.isSearchButtonLoading = true
   let searchLocations = ["X:\\User\\Documents", "X:\\User\\Desktop"]
-  // "X:\\User\\Desktop"
   let directories = []
   var i;
   for (i = 0; i < searchLocations.length; i++) {
@@ -54,8 +53,10 @@ let vueApp = new Vue({
   el: '#app',
   data: {
     message: 'Welcome back, Death.',
-    buttonText: 'DIE!!',
+    buttonText: 'Kill off.',
+    settingsButtonText: 'Settings',
     searchButtonText: "Search",
+    refreshButtonText: "Refresh",
     isButtonLoading: false,
     isButtonDisabled: false,
     isSearchButtonLoading: false,
@@ -65,7 +66,8 @@ let vueApp = new Vue({
   methods: {
     button: function () {
       this.isButtonLoading = true
-      deleteFolderRecursive("./test")
+      deleteFolderRecursive(document.getElementById("list").value)
+      this.paths = searchDirectories()
       this.isButtonLoading = false
       console.log(this.paths.length)
     },

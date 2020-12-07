@@ -15,13 +15,14 @@
   "author": "bwac",
   "license": "CC0-1.0",
   "devDependencies": {
+    "bulma": "^0.6.2",
     "electron": "^1.4.1",
-    "electron-rebuild": "^1.4.0",
     "electron-packager": "^9.0.1",
+    "electron-rebuild": "^1.4.0",
+    "node-sass": "^5.0.0",
     "standard": "*"
   },
   "dependencies": {
-    "bulma": "^0.6.1",
     "vue": "^2.5.13"
   }
 }

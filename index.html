@@ -13,6 +13,8 @@
     <!-- bulma import -->
     <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
 
+    <link rel="stylesheet" href="css/style.css">
+
     <style>
       /* prevents seeing those {{variable}} before Vue.js is ready to render */
       [v-cloak] {
@@ -25,29 +27,36 @@
         width: 100vw;
         height: 100vh;
       }
-    </style>
 
+    </style>
   </head>
 
   <body>
     <div id="app" v-cloak>
       <section class="section">
-        <div class="container">
-          <h1 class="title">
+        <div class="container" style="margin: 0 auto; width: 50%;">
+          <h1 class="title" style="color: white; text-align: center;">
               {{message}}
           </h1>
-          <a href="#" v-on:click="button" class="button is-danger" :class="{ 'is-loading': isButtonLoading }" :disabled="isButtonDisabled">{{buttonText}}</a>
+          <h5 class="subtitle is-5" style="color: white; text-align: center;">Everything is permanent!</h3>
+          <h6 class="subtitle is-6" style="color: white; text-align: center;">Please, please use version control</h3>
           <hr class="solid">
-          <div>
-            <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">Refresh</a>
+
+          <div style="text-align: center">
+            <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">{{refreshButtonText}}</a>
           </div>
-          
-          <!--
-            list
-          -->
-          <div class="select is-multiple">
-            <select multiple :size="this.paths.length" id="list"></select>
+
+          <div class="select" style="text-align: center">
+            <select id="list">
+              <option>Select Subject</option>
+            </select>
           </div>
+
+          <div class="select" style="text-align: center">
+            <a href="#" v-on:click="button" class="button is-danger" :class="{ 'is-loading': isButtonLoading }" :disabled="isButtonDisabled">{{buttonText}}</a>
+          </div>
+
+          <a href="#" v-on:click="button" class="button">{{settingsButtonText}}</a>
         </div>
       </section>
     </div>
