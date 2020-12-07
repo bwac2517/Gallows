@@ -1,0 +1,27 @@
+{
+  "name": "Gallows",
+  "productName": "Gallows",
+  "version": "1.0.0",
+  "description": "A structure, typically of two uprights and a crosspiece, for the hanging of projects that made you angry.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "install": "electron-rebuild",
+    "package-all": "electron-packager .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --prune=true",
+    "package-win": "electron-packager . --overwrite --platform=win32 --prune=true --asar=true",
+    "package-linux": "electron-packager . --overwrite --platform=linux --prune=true"
+  },
+  "author": "bwac",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "electron-rebuild": "^1.4.0",
+    "electron-packager": "^9.0.1",
+    "standard": "*"
+  },
+  "dependencies": {
+    "bulma": "^0.6.1",
+    "vue": "^2.5.13"
+  }
+}

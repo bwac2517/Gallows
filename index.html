@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- Add the responsive viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Gallows</title>
+
+    <!-- If you want to use icons with Bulma, don't forget to include Font Awesome: -->
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+
+    <!-- bulma import -->
+    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
+
+    <style>
+      /* prevents seeing those {{variable}} before Vue.js is ready to render */
+      [v-cloak] {
+        display: none;
+      }
+
+      /* This is done so that the entire body fills the available
+         height and width of the electron window */
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="app" v-cloak>
+      <section class="section">
+        <div class="container">
+          <h1 class="title">
+              {{message}}
+          </h1>
+          <a href="#" v-on:click="button" class="button is-danger" :class="{ 'is-loading': isButtonLoading }" :disabled="isButtonDisabled">{{buttonText}}</a>
+          <hr class="solid">
+          <div>
+            <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">Refresh</a>
+          </div>
+          
+          <!--
+            list
+          -->
+          <div class="select is-multiple">
+            <select multiple :size="this.paths.length" id="list"></select>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!--
+      Insert this line above script imports
+      this is done to make sure that jQuery and others are imported properly
+    -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+    <!-- import vue -->
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+    <!-- import bulma main.js -->
+    <script src="./js/bulma/main.js"></script>
+
+  </body>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</html>
