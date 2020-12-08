@@ -4,19 +4,12 @@
 const Vue = require('./node_modules/vue/dist/vue')
 const fs = require('fs');
 const Path = require('path');
+var rimraf = require("rimraf");
+
 
 const deleteFolderRecursive = function(path) {
-  if (fs.existsSync(path)) {
-    fs.readdirSync(path).forEach((file, index) => {
-      const curPath = Path.join(path, file);
-      if (fs.lstatSync(curPath).isDirectory()) { // recurse
-        deleteFolderRecursive(curPath);
-      } else { // delete file
-        fs.unlinkSync(curPath);
-      }
-    });
-    fs.rmdirSync(path);
-  }
+  console.log(path)
+  rimraf.sync(path);
 };
 
 function getDirectories(srcpath) {
@@ -27,11 +20,15 @@ function getDirectories(srcpath) {
 
 function searchDirectories() {
   this.isSearchButtonLoading = true
-  let searchLocations = ["X:\\User\\Documents", "X:\\User\\Desktop"]
+  let rawdata = fs.readFileSync('./Gallows/settings.json')
+  let settings = JSON.parse(rawdata)
+  console.log(settings)
+
+  let searchLocations = settings["paths"]
   let directories = []
-  var i;
+  var i
   for (i = 0; i < searchLocations.length; i++) {
-    directories = directories.concat(getDirectories(searchLocations[i]));
+    directories = directories.concat(getDirectories(searchLocations[i]))
   }
 
   let list = document.getElementById("list")
