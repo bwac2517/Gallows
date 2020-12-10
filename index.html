@@ -49,7 +49,7 @@
 
           <div class="select" style="text-align: center">
             <select id="list">
-              <option>Select Subject</option>
+              <option v-for="item in paths">{{ item.text }}</option>
             </select>
           </div>
 

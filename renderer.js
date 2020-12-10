@@ -8,21 +8,13 @@ var rimraf = require("rimraf");
 
 
 const deleteFolderRecursive = function(path) {
-  console.log(path)
   rimraf.sync(path);
-};
+}
 
-function getDirectories(path, searchLocations) {
-
+function getDirectories(path) {
   return fs.readdirSync(path).filter(function (file) {
     return fs.statSync(path).isDirectory();
   });
-}
-
-function getDirectories(srcpath) {
-  return fs.readdirSync(srcpath)
-    .map(file => Path.join(srcpath, file))
-    .filter(path => fs.statSync(path).isDirectory());
 }
 
 function searchDirectories() {
@@ -30,39 +22,26 @@ function searchDirectories() {
   let rawdata = fs.readFileSync('./Gallows/settings.json')
   let settings = JSON.parse(rawdata)
 
-  let searchLocations = settings["paths"]
-
   let directories = []
+
+  var tally = 0
+
   var i;
-  for (i = 0; i < searchLocations.length; i++) {
-    let dirs = getDirectories(searchLocations[i])
+  for (i = 0; i < settings["paths"].length; i++) {
+    let path = settings["paths"][i]
+    let dirs = getDirectories(path)
     var j;
-    for (j = 0; j < searchLocations.length; i++) {
+    for (j = 0; j < dirs.length; j++) {
+      let path = Path.join(settings["paths"][i], dirs[j])
 
+      if (fs.lstatSync(path).isDirectory()) {
+        directories[tally] = {"text": path}
+        tally++
+      }
     }
-    console.log(dirs)
-    directories = directories.concat(getDirectories(searchLocations[i]));
-  }
-
-  let list = document.getElementById("list")
-  list.innerHTML = '';
-  console.log(directories)
-
-  var i;
-  for (i = 0; i < directories.length; i++) {
-    const option = document.createElement('option');
-    option.value = directories[i];
-    option.innerHTML = directories[i]
-    list.appendChild(option)
-    this.isSearchButtonLoading = false
   }
   return directories
 }
-
-Vue.component('path-option', {
-  props: ['text', 'value'],
-  template: '<option value="{{ value.value }}">{{ text.text }}</option>'
-})
 
 let vueApp = new Vue({
   el: '#app',
@@ -78,15 +57,14 @@ let vueApp = new Vue({
     isSearchButtonLoading: false,
     isSearchButtonDisabled: false,
     isPopupActive: false,
-    paths: []
+    paths: [
+      {"text": "No directories found"}
+    ]
   },
   methods: {
     button: function () {
       this.isButtonLoading = true
       this.isPopupActive = true
-      let directories = searchDirectories()
-
-      this.paths = getDirectories()
       this.isButtonLoading = false
     },
     search: function () {
@@ -97,6 +75,9 @@ let vueApp = new Vue({
     }
   },
   created: function(){
-    this.paths = searchDirectories()
+    let directories = searchDirectories()
+
+    this.paths = directories
+    console.log(this.paths)
   }
 })
