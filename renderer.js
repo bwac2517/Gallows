@@ -12,6 +12,13 @@ const deleteFolderRecursive = function(path) {
   rimraf.sync(path);
 };
 
+function getDirectories(path, searchLocations) {
+
+  return fs.readdirSync(path).filter(function (file) {
+    return fs.statSync(path).isDirectory();
+  });
+}
+
 function getDirectories(srcpath) {
   return fs.readdirSync(srcpath)
     .map(file => Path.join(srcpath, file))
@@ -22,13 +29,19 @@ function searchDirectories() {
   this.isSearchButtonLoading = true
   let rawdata = fs.readFileSync('./Gallows/settings.json')
   let settings = JSON.parse(rawdata)
-  console.log(settings)
 
   let searchLocations = settings["paths"]
+
   let directories = []
-  var i
+  var i;
   for (i = 0; i < searchLocations.length; i++) {
-    directories = directories.concat(getDirectories(searchLocations[i]))
+    let dirs = getDirectories(searchLocations[i])
+    var j;
+    for (j = 0; j < searchLocations.length; i++) {
+
+    }
+    console.log(dirs)
+    directories = directories.concat(getDirectories(searchLocations[i]));
   }
 
   let list = document.getElementById("list")
@@ -46,6 +59,11 @@ function searchDirectories() {
   return directories
 }
 
+Vue.component('path-option', {
+  props: ['text', 'value'],
+  template: '<option value="{{ value.value }}">{{ text.text }}</option>'
+})
+
 let vueApp = new Vue({
   el: '#app',
   data: {
@@ -54,22 +72,28 @@ let vueApp = new Vue({
     settingsButtonText: 'Settings',
     searchButtonText: "Search",
     refreshButtonText: "Refresh",
+    popupTitle: "Delete?",
     isButtonLoading: false,
     isButtonDisabled: false,
     isSearchButtonLoading: false,
     isSearchButtonDisabled: false,
+    isPopupActive: false,
     paths: []
   },
   methods: {
     button: function () {
       this.isButtonLoading = true
-      deleteFolderRecursive(document.getElementById("list").value)
-      this.paths = searchDirectories()
+      this.isPopupActive = true
+      let directories = searchDirectories()
+
+      this.paths = getDirectories()
       this.isButtonLoading = false
-      console.log(this.paths.length)
     },
     search: function () {
       this.paths = searchDirectories()
+    },
+    cancel: function () {
+      this.isPopupActive = false
     }
   },
   created: function(){

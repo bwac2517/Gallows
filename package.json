@@ -23,6 +23,7 @@
     "standard": "*"
   },
   "dependencies": {
+    "rimraf": "^3.0.2",
     "vue": "^2.5.13"
   }
 }

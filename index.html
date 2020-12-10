@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Gallows</title>
-    
+
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
-    
+
     <!-- If you want to use icons with Bulma, don't forget to include Font Awesome: -->
     <link rel="stylesheet" href="./css/font-awesome.min.css">
-    
+
     <!-- bulma import -->
     <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
-    
+
     <style>
       /* prevents seeing those {{variable}} before Vue.js is ready to render */
       [v-cloak] {
@@ -40,6 +40,7 @@
               {{message}}
           </h1>
           <h5 class="subtitle is-5" style="color: white; text-align: center;">Everything is permanent!</h3>
+
           <hr class="solid">
 
           <div style="text-align: center">
@@ -50,6 +51,26 @@
             <select id="list">
               <option>Select Subject</option>
             </select>
+          </div>
+
+          <!-- Popup -->
+          <div class="modal" :class="{ 'is-active': isPopupActive }">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">{{popupTitle}}</p>
+                <button class="delete" aria-label="close" v-on:click="cancel"></button>
+              </header>
+              <section class="modal-card-body" id="popupCard">
+                <div class="content">
+                  <ol type="1" id="popupList"></ol>
+                </div>
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-danger">Save changes</button>
+                <button class="button" v-on:click="cancel">Cancel</button>
+              </footer>
+            </div>
           </div>
 
           <div class="select" style="text-align: center">
