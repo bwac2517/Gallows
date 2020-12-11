@@ -35,7 +35,7 @@
   <body>
     <div id="app" v-cloak>
       <section class="section">
-        <div class="container" style="margin: 0 auto; width: 50%;">
+        <div class="container" style="margin: 0 auto; width: 90%;">
           <h1 class="title" style="color: white; text-align: center;">
               {{message}}
           </h1>
@@ -45,13 +45,13 @@
 
           <div style="text-align: center">
             <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">{{ refreshButtonText }}</a>
-          </div>
 
-          <div class="select" style="text-align: center" id="select">
-            <select id="list">
-              <!-- Automatic filling of list -->
-              <option v-for="item in paths" v-bind:value="item.value">{{ item.text }}</option>
-            </select>
+            <div class="select" style="text-align: center" id="select">
+              <select id="list">
+                <!-- Automatic filling of list -->
+                <option v-for="item in paths" v-bind:value="item.value">{{ item.text }}</option>
+              </select>
+            </div>
           </div>
 
           <!-- Popup -->
@@ -78,11 +78,11 @@
             </div>
           </div>
 
-          <div class="select" style="text-align: center">
-            <a href="#" v-on:click="deleteButton" class="button is-danger" :class="{ 'is-loading': isButtonLoading }" :disabled="isButtonDisabled">{{buttonText}}</a>
+          <div style="margin-top: 30px;">
+            <button class="button is-danger" v-on:click="deleteButton" :class="{ 'is-loading': isButtonLoading }">{{ buttonText }}</button>
+            <button v-on:click="settingsButton" class="button" style="float:right;">{{ settingsButtonText }}</button>
           </div>
 
-          <a href="#" v-on:click="settingsButton" class="button">{{settingsButtonText}}</a>
         </div>
       </section>
     </div>
