@@ -22,7 +22,7 @@ let vueApp = new Vue({
     isSearchButtonDisabled: false,
     isPopupActive: false,
     paths: [
-      {"text": "No Paths found", "value": "null"}
+      { "text": "No Paths found", "value": "null" }
     ],
     potentialDeletions: []
   },
