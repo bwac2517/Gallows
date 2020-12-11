@@ -47,10 +47,10 @@
         <hr class="solid">
 
         <div style="text-align: center">
-          <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">
+          <button v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">
             <span class="is-button-text">{{refreshButtonText}}</span>
-            <img class="emoji" draggable="false" alt="🔄" src="https://twemoji.maxcdn.com/v/13.0.1/72x72/1f504.png"/>
-          </a>
+            <img class="emoji" draggable="false" alt="🔄" src="../media/refresh.png"/>
+          </button>
 
           <div class="select" style="text-align: center" id="select">
             <select id="list">
@@ -87,11 +87,11 @@
         <div style="margin-top: 30px;">
           <button class="button is-danger" v-on:click="deleteButton" :class="{ 'is-loading': isButtonLoading }">
             <span class="is-button-text">{{buttonText}}</span>
-            <img class="emoji" draggable="false" alt="🪓" src="https://twemoji.maxcdn.com/v/13.0.1/72x72/1fa93.png"/>
+            <img class="emoji" draggable="false" alt="🪓" src="../media/axe.png"/>
           </button>
           <button v-on:click="settingsButton" class="button" style="float:right;">
             <span class="is-button-text">{{settingsButtonText}}</span>
-            <img class="emoji" draggable="false" alt="⚙️" src="https://twemoji.maxcdn.com/v/13.0.1/72x72/2699.png"/>
+            <img class="emoji" draggable="false" alt="⚙️" src="../media/cog.png"/>
           </button>
         </div>
 
