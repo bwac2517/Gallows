@@ -64,7 +64,11 @@
               </header>
               <section class="modal-card-body" id="popupCard">
                 <div class="content">
-                  <ol type="1" id="popupList"></ol>
+                  <h4 class="title is-4">⚠️ Will delete the following:</h4>
+                  <ol type="1" id="popupList">
+                    <!-- Automatic filling of list -->
+                    <li v-for="item in potentialDeletions">{{ item.text }}</li>
+                  </ol>
                 </div>
               </section>
               <footer class="modal-card-foot">

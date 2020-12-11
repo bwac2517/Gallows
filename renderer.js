@@ -23,12 +23,32 @@ let vueApp = new Vue({
     isPopupActive: false,
     paths: [
       {"text": "No Paths found", "value": "null"}
-    ]
+    ],
+    potentialDeletions: []
   },
   methods: {
     deleteButton: function () {
       this.isButtonLoading = true
       this.isPopupActive = true
+
+      let list = document.getElementById("list")
+      let path = list.options[list.selectedIndex].text
+
+      // find all things in directory
+      let potentialDeletions = fs.readdirSync(path).filter(function (file) {
+        return fs.statSync(path).isDirectory();
+      });
+
+      // join all paths together
+      var i;
+      for (i = 0; i < potentialDeletions.length; i++) {
+        potentialDeletions[i] = { "text": Path.join(path, potentialDeletions[i]) }
+      }
+
+      this.potentialDeletions = potentialDeletions
+
+      console.log(this.potentialDeletions)
+
       this.isButtonLoading = false
     },
     settingsButton: function () {
@@ -51,7 +71,7 @@ let vueApp = new Vue({
 
         // search the path for files
         let dirs = fs.readdirSync(path).filter(function (file) {
-          return fs.statSync(path).isDirectory();
+          return fs.statSync(path)
         });
 
         var j;
@@ -71,13 +91,13 @@ let vueApp = new Vue({
       this.isSearchButtonLoading = false
     },
     cancelButton: function () {
-      console.log("this")
       this.isPopupActive = false
     },
     confirmDeleteButton: function () {
       let list = document.getElementById("list")
       // get selcted item in list
       rimraf.sync(list.options[list.selectedIndex].text)
+      this.search()
       this.isPopupActive = false
     }
   },
