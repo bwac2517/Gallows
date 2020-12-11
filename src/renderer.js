@@ -1,7 +1,7 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-const Vue = require('./node_modules/vue/dist/vue')
+const Vue = require('../node_modules/vue/dist/vue')
 const fs = require('fs');
 const Path = require('path');
 var rimraf = require("rimraf");
@@ -58,7 +58,7 @@ let vueApp = new Vue({
       this.isSearchButtonLoading = true
 
       // searches for settings
-      let rawdata = fs.readFileSync('./Gallows/settings.json')
+      let rawdata = fs.readFileSync('./src/settings.json')
       let settings = JSON.parse(rawdata)
 
       let directories = []

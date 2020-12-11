@@ -3,7 +3,7 @@
   "productName": "Gallows",
   "version": "1.0.0",
   "description": "A structure, typically of two uprights and a crosspiece, for the hanging of projects that made you angry.",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "install": "electron-rebuild",
