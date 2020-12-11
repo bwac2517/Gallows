@@ -44,12 +44,12 @@
           <hr class="solid">
 
           <div style="text-align: center">
-            <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">{{refreshButtonText}}</a>
+            <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">{{ refreshButtonText }}</a>
           </div>
 
-          <div class="select" style="text-align: center">
+          <div class="select" style="text-align: center" id="select">
             <select id="list">
-              <option v-for="item in paths">{{ item.text }}</option>
+              <option v-for="item in paths" v-bind:value="item.value">{{ item.text }}</option>
             </select>
           </div>
 
@@ -59,7 +59,7 @@
             <div class="modal-card">
               <header class="modal-card-head">
                 <p class="modal-card-title">{{popupTitle}}</p>
-                <button class="delete" aria-label="close" v-on:click="cancel"></button>
+                <button class="delete" aria-label="close" v-on:click="cancelButton"></button>
               </header>
               <section class="modal-card-body" id="popupCard">
                 <div class="content">
@@ -67,17 +67,17 @@
                 </div>
               </section>
               <footer class="modal-card-foot">
-                <button class="button is-danger">Save changes</button>
-                <button class="button" v-on:click="cancel">Cancel</button>
+                <button class="button is-danger" v-on:click="confirmDeleteButton">Delete (!!)</button>
+                <button class="button" v-on:click="cancelButton">Cancel</button>
               </footer>
             </div>
           </div>
 
           <div class="select" style="text-align: center">
-            <a href="#" v-on:click="button" class="button is-danger" :class="{ 'is-loading': isButtonLoading }" :disabled="isButtonDisabled">{{buttonText}}</a>
+            <a href="#" v-on:click="deleteButton" class="button is-danger" :class="{ 'is-loading': isButtonLoading }" :disabled="isButtonDisabled">{{buttonText}}</a>
           </div>
 
-          <a href="#" v-on:click="button" class="button">{{settingsButtonText}}</a>
+          <a href="#" v-on:click="settingsButton" class="button">{{settingsButtonText}}</a>
         </div>
       </section>
     </div>

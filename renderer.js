@@ -7,42 +7,6 @@ const Path = require('path');
 var rimraf = require("rimraf");
 
 
-const deleteFolderRecursive = function(path) {
-  rimraf.sync(path);
-}
-
-function getDirectories(path) {
-  return fs.readdirSync(path).filter(function (file) {
-    return fs.statSync(path).isDirectory();
-  });
-}
-
-function searchDirectories() {
-  this.isSearchButtonLoading = true
-  let rawdata = fs.readFileSync('./Gallows/settings.json')
-  let settings = JSON.parse(rawdata)
-
-  let directories = []
-
-  var tally = 0
-
-  var i;
-  for (i = 0; i < settings["paths"].length; i++) {
-    let path = settings["paths"][i]
-    let dirs = getDirectories(path)
-    var j;
-    for (j = 0; j < dirs.length; j++) {
-      let path = Path.join(settings["paths"][i], dirs[j])
-
-      if (fs.lstatSync(path).isDirectory()) {
-        directories[tally] = {"text": path}
-        tally++
-      }
-    }
-  }
-  return directories
-}
-
 let vueApp = new Vue({
   el: '#app',
   data: {
@@ -58,26 +22,65 @@ let vueApp = new Vue({
     isSearchButtonDisabled: false,
     isPopupActive: false,
     paths: [
-      {"text": "No directories found"}
+      {"text": "No Paths found", "value": "null"}
     ]
   },
   methods: {
-    button: function () {
+    deleteButton: function () {
       this.isButtonLoading = true
       this.isPopupActive = true
       this.isButtonLoading = false
     },
-    search: function () {
-      this.paths = searchDirectories()
+    settingsButton: function () {
+      console.log("TODO")
     },
-    cancel: function () {
+    search: function () {
+      this.isSearchButtonLoading = true
+
+      // searches for settings
+      let rawdata = fs.readFileSync('./Gallows/settings.json')
+      let settings = JSON.parse(rawdata)
+
+      let directories = []
+      var tally = 0
+
+      // makes array of objects with both "value", "text"
+      var i;
+      for (i = 0; i < settings["paths"].length; i++) {
+        let path = settings["paths"][i]
+
+        // search the path for files
+        let dirs = fs.readdirSync(path).filter(function (file) {
+          return fs.statSync(path).isDirectory();
+        });
+
+        var j;
+        for (j = 0; j < dirs.length; j++) {
+          // join the file name and the current path we are searching
+          let path = Path.join(settings["paths"][i], dirs[j])
+
+          if (fs.lstatSync(path).isDirectory()) {
+            directories[tally] = {"text": path, "value": path}
+            // increase tally
+            tally++
+          }
+        }
+      }
+
+      this.paths = directories
+      this.isSearchButtonLoading = false
+    },
+    cancelButton: function () {
+      console.log("this")
+      this.isPopupActive = false
+    },
+    confirmDeleteButton: function () {
+      let list = document.getElementById("list")
+      rimraf.sync(list.options[list.selectedIndex].text)
       this.isPopupActive = false
     }
   },
   created: function(){
-    let directories = searchDirectories()
-
-    this.paths = directories
-    console.log(this.paths)
+    this.search()
   }
 })
