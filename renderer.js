@@ -76,6 +76,7 @@ let vueApp = new Vue({
     },
     confirmDeleteButton: function () {
       let list = document.getElementById("list")
+      // get selcted item in list
       rimraf.sync(list.options[list.selectedIndex].text)
       this.isPopupActive = false
     }
