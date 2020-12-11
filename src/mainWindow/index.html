@@ -15,6 +15,8 @@
 
     <!-- bulma import -->
     <link rel="stylesheet" href="../../node_modules/bulma/css/bulma.css">
+    
+    <script src="../../node_modules/twemoji/twemoji.min.js"></script>
 
     <style>
       /* prevents seeing those {{variable}} before Vue.js is ready to render */
@@ -35,15 +37,20 @@
   <body>
     <div class="invisible-scrollbar" id="app" v-cloak>
       <div class="container" style="margin: 0 auto; width: 90%;">
-        <h1 class="title" style="color: white; text-align: center;">
-            {{message}}
+        <h1 class="title" style="color: white; text-align: center; padding-top: 20px;">
+            <span>{{message}}</span>
+            <img class="emoji" draggable="false" alt="💀" src="../media/death.png"/>
         </h1>
+
         <h5 class="subtitle is-5" style="color: white; text-align: center;">Be careful, Everything is permanent!</h3>
 
         <hr class="solid">
 
         <div style="text-align: center">
-          <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">{{ refreshButtonText }}</a>
+          <a href="#" v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">
+            <span class="is-button-text">{{refreshButtonText}}</span>
+            <img class="emoji" draggable="false" alt="🔄" src="https://twemoji.maxcdn.com/v/13.0.1/72x72/1f504.png"/>
+          </a>
 
           <div class="select" style="text-align: center" id="select">
             <select id="list">
@@ -78,8 +85,14 @@
         </div>
 
         <div style="margin-top: 30px;">
-          <button class="button is-danger" v-on:click="deleteButton" :class="{ 'is-loading': isButtonLoading }">{{ buttonText }}</button>
-          <button v-on:click="settingsButton" class="button" style="float:right;">{{ settingsButtonText }}</button>
+          <button class="button is-danger" v-on:click="deleteButton" :class="{ 'is-loading': isButtonLoading }">
+            <span class="is-button-text">{{buttonText}}</span>
+            <img class="emoji" draggable="false" alt="🪓" src="https://twemoji.maxcdn.com/v/13.0.1/72x72/1fa93.png"/>
+          </button>
+          <button v-on:click="settingsButton" class="button" style="float:right;">
+            <span class="is-button-text">{{settingsButtonText}}</span>
+            <img class="emoji" draggable="false" alt="⚙️" src="https://twemoji.maxcdn.com/v/13.0.1/72x72/2699.png"/>
+          </button>
         </div>
 
       </div>

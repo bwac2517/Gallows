@@ -11,7 +11,7 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 450, height: 550, resizable: false})
+  mainWindow = new BrowserWindow({width: 450, height: 550, resizable: false, icon: __dirname + "media/death.ico"})
   mainWindow.setMenuBarVisibility(false)
 
   // and load the index.html of the app.

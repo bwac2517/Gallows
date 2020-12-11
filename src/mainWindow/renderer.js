@@ -4,6 +4,7 @@
 const Vue = require('vue/dist/vue')
 const fs = require('fs');
 const Path = require('path');
+const twemoji = require('twemoji')
 var rimraf = require("rimraf");
 
 
@@ -24,7 +25,8 @@ let vueApp = new Vue({
     paths: [
       { "text": "No Paths found", "value": "null" }
     ],
-    potentialDeletions: []
+    potentialDeletions: [],
+    twemoji: twemoji
   },
   methods: {
     deleteButton: function () {
