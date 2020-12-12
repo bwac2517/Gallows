@@ -7,17 +7,15 @@
   "scripts": {
     "start": "electron .",
     "install": "electron-rebuild",
-    "package-all": "electron-packager .",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --prune=true",
-    "package-win": "electron-packager . --overwrite --platform=win32 --prune=true --asar=true",
-    "package-linux": "electron-packager . --overwrite --platform=linux --prune=true"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "author": "bwac",
   "license": "GNU GPLv3",
   "devDependencies": {
+    "electron-builder": "^22.9.1",
     "bulma": "^0.6.2",
     "electron": "^1.4.1",
-    "electron-rebuild": "^1.4.0",
     "node-sass": "^5.0.0",
     "standard": "*"
   },
@@ -27,9 +25,10 @@
     "vue": "^2.5.13"
   },
   "build": {
-    "appId": "com.bwac.gallows",
-    "mac": {
-      "category": "your.app.category.type"
-    }
+    "appId": "com.electron.gallows",
+    "copyright": "Copyright © 2020 bwac",
+    "extraFiles": [
+      "media/*", "js/*", "css/*", "settings.json"
+    ]
   }
 }
