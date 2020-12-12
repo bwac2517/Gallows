@@ -7,7 +7,6 @@ const Path = require('path');
 const twemoji = require('twemoji')
 var rimraf = require("rimraf");
 
-
 let vueApp = new Vue({
   el: '#app',
   data: {
@@ -21,8 +20,6 @@ let vueApp = new Vue({
     isButtonDisabled: false,
     isSearchButtonLoading: false,
     isSearchButtonDisabled: false,
-    isSettingsActive: false,
-    isPopupActive: false,
     paths: [
       { "text": "No Paths found", "value": "null" }
     ],
@@ -35,7 +32,7 @@ let vueApp = new Vue({
   methods: {
     deleteButton: function () {
       this.isButtonLoading = true
-      this.isPopupActive = true
+      document.getElementById("popUp").classList.add("is-active")
 
       let list = document.getElementById("list")
       let path = list.options[list.selectedIndex].text
@@ -58,7 +55,40 @@ let vueApp = new Vue({
       this.isButtonLoading = false
     },
     settingsButton: function () {
-      this.isSettingsActive = true
+      document.getElementById("settings").classList.add("is-active")
+
+      let rawdata = fs.readFileSync('./settings.json')
+      let settings = JSON.parse(rawdata) 
+      
+      var i;
+      for (i = 0; i < settings["paths"].length; i++) {
+        this.pathSettings[i] = {
+          "text": settings["paths"][i]
+        }
+      }
+    },
+    addPath: function () {
+      let dirSelect = document.getElementById('dirSelect')
+
+      // searches for settings
+      let rawdata = fs.readFileSync('./settings.json')
+      let settings = JSON.parse(rawdata)
+
+      settings["paths"].push(dirSelect.files[0].path)
+
+      console.log(settings.paths)
+
+      // save
+      let data = JSON.stringify(settings)
+      fs.writeFileSync('./settings.json', data)
+
+      this.pathSettings = []
+      var i;
+      for (i = 0; i < settings["paths"].length; i++) {
+        this.pathSettings[i] = {
+          "text": settings["paths"][i]
+        }
+      }
     },
     search: function () {
       this.isSearchButtonLoading = true
@@ -96,19 +126,11 @@ let vueApp = new Vue({
       this.paths = directories
       this.isSearchButtonLoading = false
     },
-    cancelButton: function () {
-      this.isPopupActive = false
-      this.isSettingsActive = false
-    },
-    saveSettings: function () {
-      this.isPopupActive = false
-    },
     confirmDeleteButton: function () {
       let list = document.getElementById("list")
       // get selcted item in list
       rimraf.sync(list.options[list.selectedIndex].text)
       this.search()
-      this.isPopupActive = false
     }
   },
   created: function(){
@@ -117,13 +139,20 @@ let vueApp = new Vue({
     let settings = JSON.parse(rawdata)
 
     if (settings.first_run == true) {
-      this.isSettingsActive = true
+      document.getElementById("settings").classList.add("is-active")
       settings.first_run = false
 
       let data = JSON.stringify(settings)
       fs.writeFileSync('./settings.json', data)
-    }
 
+      this.pathSettings = []
+      var i;
+      for (i = 0; i < settings["paths"].length; i++) {
+        this.pathSettings[i] = {
+          "text": settings["paths"][i]
+        }
+      }
+    }
     this.search()
   }
 })

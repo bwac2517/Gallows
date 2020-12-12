@@ -59,7 +59,7 @@
         </div>
 
         <!-- Popup -->
-        <div class="modal" :class="{ 'is-active': isPopupActive }">
+        <div class="modal" id="popUp">
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head">
@@ -76,13 +76,13 @@
             </section>
             <footer class="modal-card-foot">
               <button class="button is-danger" v-on:click="confirmDeleteButton">Delete</button>
-              <button class="button" v-on:click="cancelButton">Cancel</button>
+              <button class="button">Cancel</button>
             </footer>
           </div>
         </div>
 
         <!-- Settings -->
-        <div class="modal" :class="{ 'is-active': isSettingsActive }">
+        <div class="modal" id="settings">
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head">
@@ -91,15 +91,17 @@
                 Settings
               </p>
             </header>
-            <section class="modal-card-body" id="popupCard">
+            <section class="modal-card-body">
               <div class="content">
                 <!-- Automatic filling of list -->
                 <li v-for="item in pathSettings">{{ item.text }}</li>
+
+                <input type="file" webkitdirectory id="dirSelect" />
+                <button class="button is-primary" v-on:click="addPath">Add</button>
               </div>
             </section>
             <footer class="modal-card-foot">
-              <button class="button is-primary" v-on:click="saveSettings">Save</button>
-              <button class="button" v-on:click="cancelButton">Cancel</button>
+              <button class="button is-primary">Close</button>
             </footer>
           </div>
         </div>

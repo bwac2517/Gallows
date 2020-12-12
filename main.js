@@ -9,7 +9,12 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 450, height: 550, resizable: false, icon: __dirname + "media/death.ico"})
+  mainWindow = new BrowserWindow({
+    width: 450,
+    height: 550,
+    resizable: false,
+    icon: __dirname + "media/death.ico"
+  })
   mainWindow.setMenuBarVisibility(false)
 
   mainWindow.loadURL(url.format({
