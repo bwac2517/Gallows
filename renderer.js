@@ -60,7 +60,7 @@ let vueApp = new Vue({
       this.isSearchButtonLoading = true
 
       // searches for settings
-      let rawdata = fs.readFileSync('./src/settings.json')
+      let rawdata = fs.readFileSync('settings.json')
       let settings = JSON.parse(rawdata)
 
       let directories = []

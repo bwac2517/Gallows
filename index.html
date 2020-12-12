@@ -8,15 +8,15 @@
     <title>Gallows</title>
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- If you want to use icons with Bulma, don't forget to include Font Awesome: -->
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <!-- bulma import -->
-    <link rel="stylesheet" href="../../node_modules/bulma/css/bulma.css">
+    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
     
-    <script src="../../node_modules/twemoji/twemoji.min.js"></script>
+    <script src="./node_modules/twemoji/twemoji.min.js"></script>
 
     <style>
       /* prevents seeing those {{variable}} before Vue.js is ready to render */
@@ -39,7 +39,7 @@
       <div class="container" style="margin: 0 auto; width: 90%;">
         <h1 class="title" style="color: white; text-align: center; padding-top: 20px;">
             <span>{{message}}</span>
-            <img class="emoji" draggable="false" alt="💀" src="../media/death.png"/>
+            <img class="emoji" draggable="false" alt="💀" src="./media/death.png"/>
         </h1>
 
         <h5 class="subtitle is-5" style="color: white; text-align: center;">Be careful, Everything is permanent!</h3>
@@ -49,7 +49,7 @@
         <div style="text-align: center">
           <button v-on:click="search" class="button is-rounded" :class="{ 'is-loading': isSearchButtonLoading }" :disabled="isSearchButtonDisabled">
             <span class="is-button-text">{{refreshButtonText}}</span>
-            <img class="emoji" draggable="false" alt="🔄" src="../media/refresh.png"/>
+            <img class="emoji" draggable="false" alt="🔄" src="./media/refresh.png"/>
           </button>
 
           <div class="select" style="text-align: center" id="select">
@@ -87,11 +87,11 @@
         <div style="margin-top: 30px;">
           <button class="button is-danger" v-on:click="deleteButton" :class="{ 'is-loading': isButtonLoading }">
             <span class="is-button-text">{{buttonText}}</span>
-            <img class="emoji" draggable="false" alt="🪓" src="../media/axe.png"/>
+            <img class="emoji" draggable="false" alt="🪓" src="./media/axe.png"/>
           </button>
           <button v-on:click="settingsButton" class="button" style="float:right;">
             <span class="is-button-text">{{settingsButtonText}}</span>
-            <img class="emoji" draggable="false" alt="⚙️" src="../media/cog.png"/>
+            <img class="emoji" draggable="false" alt="⚙️" src="./media/cog.png"/>
           </button>
         </div>
 
@@ -105,10 +105,10 @@
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
 
     <!-- import vue -->
-    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue/dist/vue.js"></script>
 
     <!-- import bulma main.js -->
-    <script src="../js/bulma/main.js"></script>
+    <script src="./js/bulma/main.js"></script>
 
   </body>
 
