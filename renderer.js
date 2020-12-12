@@ -26,7 +26,7 @@ let vueApp = new Vue({
       { "text": "No Paths found", "value": "null" }
     ],
     potentialDeletions: [],
-    twemoji: twemoji
+    twemoji: twemoji,
   },
   methods: {
     deleteButton: function () {
