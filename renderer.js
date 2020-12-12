@@ -21,9 +21,13 @@ let vueApp = new Vue({
     isButtonDisabled: false,
     isSearchButtonLoading: false,
     isSearchButtonDisabled: false,
+    isSettingsActive: false,
     isPopupActive: false,
     paths: [
       { "text": "No Paths found", "value": "null" }
+    ],
+    pathSettings: [
+      { "text": "No Paths, set some", "value": "null" }
     ],
     potentialDeletions: [],
     twemoji: twemoji,
@@ -54,13 +58,13 @@ let vueApp = new Vue({
       this.isButtonLoading = false
     },
     settingsButton: function () {
-      console.log("TODO")
+      this.isSettingsActive = true
     },
     search: function () {
       this.isSearchButtonLoading = true
 
       // searches for settings
-      let rawdata = fs.readFileSync('settings.json')
+      let rawdata = fs.readFileSync('./settings.json')
       let settings = JSON.parse(rawdata)
 
       let directories = []
@@ -94,6 +98,10 @@ let vueApp = new Vue({
     },
     cancelButton: function () {
       this.isPopupActive = false
+      this.isSettingsActive = false
+    },
+    saveSettings: function () {
+      this.isPopupActive = false
     },
     confirmDeleteButton: function () {
       let list = document.getElementById("list")
@@ -104,6 +112,18 @@ let vueApp = new Vue({
     }
   },
   created: function(){
+    console.log("Hey!")
+    let rawdata = fs.readFileSync('./settings.json')
+    let settings = JSON.parse(rawdata)
+
+    if (settings.first_run == true) {
+      this.isSettingsActive = true
+      settings.first_run = false
+
+      let data = JSON.stringify(settings)
+      fs.writeFileSync('./settings.json', data)
+    }
+
     this.search()
   }
 })

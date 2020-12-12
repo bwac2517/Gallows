@@ -8,16 +8,14 @@
     <title>Gallows</title>
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 
     <!-- If you want to use icons with Bulma, don't forget to include Font Awesome: -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
 
     <!-- bulma import -->
-    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
+    <link rel="stylesheet" href="./css/bulma.css">
     
-    <script src="./node_modules/twemoji/twemoji.min.js"></script>
-
     <style>
       /* prevents seeing those {{variable}} before Vue.js is ready to render */
       [v-cloak] {
@@ -66,7 +64,6 @@
           <div class="modal-card">
             <header class="modal-card-head">
               <p class="modal-card-title">{{popupTitle}}</p>
-              <button class="delete" aria-label="close" v-on:click="cancelButton"></button>
             </header>
             <section class="modal-card-body" id="popupCard">
               <div class="content">
@@ -83,6 +80,30 @@
             </footer>
           </div>
         </div>
+
+        <!-- Settings -->
+        <div class="modal" :class="{ 'is-active': isSettingsActive }">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">
+                <img class="emoji" draggable="false" alt="🔄" src="./media/cog.png"/>
+                Settings
+              </p>
+            </header>
+            <section class="modal-card-body" id="popupCard">
+              <div class="content">
+                <!-- Automatic filling of list -->
+                <li v-for="item in pathSettings">{{ item.text }}</li>
+              </div>
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-primary" v-on:click="saveSettings">Save</button>
+              <button class="button" v-on:click="cancelButton">Cancel</button>
+            </footer>
+          </div>
+        </div>
+
 
         <div style="margin-top: 30px;">
           <button class="button is-danger" v-on:click="deleteButton" :class="{ 'is-loading': isButtonLoading }">

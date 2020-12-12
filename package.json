@@ -28,7 +28,7 @@
     "appId": "com.electron.gallows",
     "copyright": "Copyright © 2020 bwac",
     "extraFiles": [
-      "media/*", "js/*", "css/*", "settings.json"
+      "settings.json"
     ]
   }
 }
