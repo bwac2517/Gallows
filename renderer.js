@@ -73,15 +73,19 @@ let vueApp = new Vue({
       // searches for settings
       let rawdata = fs.readFileSync('./settings.json')
       let settings = JSON.parse(rawdata)
+      let paths = settings["paths"]
+
+      if (settings["paths"].includes(dirSelect.files[0].path)) {
+        return
+      }
 
       settings["paths"].push(dirSelect.files[0].path)
-
-      console.log(settings.paths)
 
       // save
       let data = JSON.stringify(settings)
       fs.writeFileSync('./settings.json', data)
-
+      
+      
       this.pathSettings = []
       var i;
       for (i = 0; i < settings["paths"].length; i++) {
