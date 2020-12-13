@@ -3,7 +3,7 @@
   "productName": "Gallows",
   "version": "1.0.0",
   "description": "A structure, typically of two uprights and a crosspiece, for the hanging of projects that made you angry.",
-  "main": "./src/main.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
     "install": "electron-rebuild",
@@ -13,10 +13,9 @@
   "author": "bwac",
   "license": "GNU GPLv3",
   "devDependencies": {
+    "electron-builder": "^22.9.1",
     "bulma": "^0.6.2",
     "electron": "^1.4.1",
-    "electron-builder": "^22.9.1",
-    "electron-rebuild": "^2.3.4",
     "node-sass": "^5.0.0",
     "standard": "*"
   },
